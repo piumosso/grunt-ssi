@@ -60,7 +60,7 @@ module.exports = function (grunt) {
                 var data = ssi.processFile(filepath, null, options.cache);
 
                 if (options.suffix) {
-                    filepath = filepath.replace(options.suffix, '')
+                    filepath = filepath.replace(options.suffix + '.', '')
                 }
                 var dest = f.dest ? f.dest : path.join(options.outputDir, filepath);
 
