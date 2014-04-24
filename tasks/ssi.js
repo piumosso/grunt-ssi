@@ -26,6 +26,8 @@ module.exports = function (grunt) {
             ext: '.html',
             encoding: 'utf8',
             baseDir: 'html',
+            outputDir: '',
+            suffix: ''
         };
 
         var options = this.options(defaults);
@@ -57,8 +59,10 @@ module.exports = function (grunt) {
                 grunt.verbose.write('Creating File \'' + f.dest + '\' from \'' + filepath + '\'')
                 var data = ssi.processFile(filepath, null, options.cache);
 
-                //Check if dest is set, if not default to 'output'
-                var dest = f.dest ? f.dest : path.join('output', filepath);
+                if (options.suffix) {
+                    filepath = filepath.replace(options.suffix, '')
+                }
+                var dest = f.dest ? f.dest : path.join(options.outputDir, filepath);
 
                 //Create the processed file
                 grunt.file.write(dest, data);
